@@ -1,35 +1,44 @@
 # Simple Linux Commands in Python
 
-پیاده‌سازی ساده‌ی سه دستور `cmp`، `grep` و `diff` با پایتون. هدف پروژه،
-تمرین کار با فایل‌ها، آرگومان‌های خط فرمان و کدهای خروجی بوده است.
+Small Python implementations of four common Linux commands: `cp`, `cmp`,
+`grep`, and `diff`. This project is mainly an exercise in file handling,
+command-line arguments, binary data, regular expressions, and exit codes.
 
-## اجرا
+## Usage
 
 ```powershell
+py cp.py source.txt destination.txt
 py cmp.py file1.txt file2.txt
 py grep.py "pattern" file.txt
 py diff.py file1.txt file2.txt
 ```
 
+### cp
+
+Copies a file in 4096-byte blocks. The destination can be a file path or an
+existing directory. A confirmation message is printed after a successful copy.
+
 ### cmp
 
-ابتدا اندازه‌ی دو فایل و بعد محتوای آن‌ها را به‌صورت باینری مقایسه می‌کند.
-در صورت وجود اختلاف، محل اولین بایت و خط متفاوت نمایش داده می‌شود.
+Checks file sizes first and then compares the contents as binary data. It
+reports the first different byte and line, or prints a message when the files
+are identical.
 
 ### grep
 
-خط‌هایی را که با الگوی داده‌شده تطبیق دارند چاپ می‌کند. امکان جست‌وجو در
-چند فایل هم وجود دارد.
+Prints lines that match the given regular expression. More than one input file
+can be searched in the same command.
 
 ### diff
 
-اختلاف خط‌به‌خط دو فایل متنی را با قالب معمول دستور `diff` نشان می‌دهد.
+Shows line-by-line differences between two text files using the normal `diff`
+output format.
 
-این نسخه حالت پایه‌ی دستورها را پیاده‌سازی می‌کند و گزینه‌هایی مثل `-i`،
-`-n`، `-u` و `--color` در آن وجود ندارند.
+These programs implement the basic form of each command. Options such as `-r`,
+`-i`, `-n`, `-u`, and `--color` are not included.
 
-## کدهای خروجی
+## Exit codes
 
-- `0`: فایل‌ها برابرند یا `grep` نتیجه پیدا کرده است.
-- `1`: فایل‌ها متفاوت‌اند یا `grep` نتیجه‌ای پیدا نکرده است.
-- `2`: ورودی نامعتبر است یا فایل باز نشده است.
+- `0`: The operation succeeded, the files are identical, or `grep` found a match.
+- `1`: The files differ, `grep` found no match, or `cp` could not copy the file.
+- `2`: The command usage is invalid or an input file could not be opened.
