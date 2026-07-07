@@ -11,7 +11,7 @@ def main():
     file2 = sys.argv[2]
 
     try:
-        # طبق صورت سوال، اول اندازه دو فايل بررسي مي شود.
+        # As requested, file sizes are checked before their contents.
         size1 = os.path.getsize(file1)
         size2 = os.path.getsize(file2)
 
